@@ -1,6 +1,5 @@
-add_executable(main)
-
-target_sources(main
+target_sources(VulkanApplication
     PRIVATE
         main.cpp
+        vulkan_application.cpp
 )
