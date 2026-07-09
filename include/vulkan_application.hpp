@@ -3,7 +3,12 @@
 
 #include <vulkan/vulkan_raii.hpp>
 
+#include "window.hpp"
+
 class VulkanApplication {
+ private:
+  Window window;
+
  public:
   VulkanApplication();
   ~VulkanApplication();
