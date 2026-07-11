@@ -7,11 +7,18 @@
 
 class VulkanApplication {
  private:
-  Window window;
+  Window* window;
 
  public:
   VulkanApplication();
   ~VulkanApplication();
+
+  /**
+   * return
+   * false: Application quit
+   * true: else
+   */
+  bool update();
 };
 
 #endif  // VULKAN_APPLICATION

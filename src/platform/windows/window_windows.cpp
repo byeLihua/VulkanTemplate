@@ -30,13 +30,31 @@ void WindowWindows::_destroyWindow() {
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg, WPARAM wParam,
                             LPARAM lParam) {
+  if (WM_DESTROY == uMsg) {
+    PostQuitMessage(wParam);
+    return 0;
+  }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-vk::SurfaceKHR WindowWindows::getSurface() { return nullptr; }
+vk::raii::SurfaceKHR WindowWindows::getSurface() { return nullptr; }
 
 void WindowWindows::setTitle(const char* title) {}
 
 void WindowWindows::setWidth(const uint16_t width) {}
 
 void WindowWindows::setHeight(const uint16_t height) {}
+
+bool WindowWindows::update() {
+  MSG msg;
+  bool isNotQuit = true;
+  while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+    if (WM_QUIT == msg.message) {
+      isNotQuit = false;
+    } else {
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+    }
+  }
+  return isNotQuit;
+}

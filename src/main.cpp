@@ -1,8 +1,8 @@
-#include <iostream>
-
 #include "vulkan_application.hpp"
 
 int main(int argc, char** argv) {
-  VulkanApplication Application = VulkanApplication();
+  VulkanApplication application = VulkanApplication();
+  while (application.update()) {
+  }
   return 0;
 }

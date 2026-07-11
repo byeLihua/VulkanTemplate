@@ -6,8 +6,6 @@
 #endif
 #include <windows.h>
 
-#include <string>
-
 #include "window.hpp"
 
 class WindowWindows : public Window {
@@ -23,10 +21,12 @@ class WindowWindows : public Window {
   WindowWindows();
   ~WindowWindows();
 
-  vk::SurfaceKHR getSurface() override;
+  vk::raii::SurfaceKHR getSurface() override;
   void setTitle(const char* title) override;
   void setWidth(const uint16_t width) override;
   void setHeight(const uint16_t height) override;
+
+  bool update() override;
 };
 
 #endif  // WINDOW_WINDOWS
