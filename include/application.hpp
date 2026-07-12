@@ -1,17 +1,17 @@
-#ifndef VULKAN_APPLICATION
-#define VULKAN_APPLICATION
+#ifndef APPLICATION_HPP
+#define APPLICATION_HPP
 
 #include <vulkan/vulkan_raii.hpp>
 
 #include "window.hpp"
 
-class VulkanApplication {
+class Application {
  private:
   Window* window;
 
  public:
-  VulkanApplication();
-  ~VulkanApplication();
+  Application();
+  ~Application();
 
   /**
    * return
@@ -21,4 +21,4 @@ class VulkanApplication {
   bool update();
 };
 
-#endif  // VULKAN_APPLICATION
+#endif  // APPLICATION_HPP

@@ -1,7 +1,7 @@
 target_sources(VulkanApplication
     PRIVATE
         main.cpp
-        vulkan_application.cpp
+        application.cpp
         window.cpp
 )
 

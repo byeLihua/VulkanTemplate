@@ -1,18 +1,18 @@
-#include "vulkan_application.hpp"
+#include "application.hpp"
 
 #ifdef _WIN32
 #include "platform/windows/window_windows.hpp"
 #endif
 
-VulkanApplication::VulkanApplication() {
+Application::Application() {
 #ifdef _WIN32
   window = new WindowWindows();
 #endif
 }
 
-VulkanApplication::~VulkanApplication() { delete (window); }
+Application::~Application() { delete (window); }
 
-bool VulkanApplication::update() {
+bool Application::update() {
   bool isRunning = true;
   if (!window->update()) {
     isRunning = false;

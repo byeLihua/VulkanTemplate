@@ -1,5 +1,5 @@
-#ifndef WINDOW_WINDOWS
-#define WINDOW_WINDOWS
+#ifndef WINDOW_WINDOWS_HPP
+#define WINDOW_WINDOWS_HPP
 
 #ifndef UNICODE
 #define UNICODE
@@ -29,4 +29,4 @@ class WindowWindows : public Window {
   bool update() override;
 };
 
-#endif  // WINDOW_WINDOWS
+#endif  // WINDOW_WINDOWS_HPP
