@@ -3,7 +3,6 @@ target_sources(VulkanApplication
         main.cpp
         application.cpp
         vk_manager.cpp
-        window.cpp
 )
 
 add_subdirectory(platform)

@@ -3,13 +3,18 @@
 
 #include <vulkan/vulkan_raii.hpp>
 
+#ifdef _WIN32
+#include "platform/windows/window_windows.hpp"
+#endif
+
 #include "vk_manager.hpp"
-#include "window.hpp"
 
 class Application {
  private:
-  Window* _window;
-  VkManager* _vkManager;
+#ifdef _WIN32
+  WindowWindows _window;
+#endif
+  VkManager _vkManager;
 
  public:
   Application();
