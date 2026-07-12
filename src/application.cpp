@@ -6,15 +6,19 @@
 
 Application::Application() {
 #ifdef _WIN32
-  window = new WindowWindows();
+  _window = new WindowWindows();
+  _vkManager = new VkManager();
 #endif
 }
 
-Application::~Application() { delete (window); }
+Application::~Application() {
+  delete (_vkManager);
+  delete (_window);
+}
 
 bool Application::update() {
   bool isRunning = true;
-  if (!window->update()) {
+  if (!_window->update()) {
     isRunning = false;
   }
   return isRunning;
