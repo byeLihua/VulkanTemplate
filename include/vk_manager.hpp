@@ -11,8 +11,10 @@ class VkManager {
 
   vk::raii::Context _context;
   vk::raii::Instance _instance = nullptr;
+  vk::raii::Device _device = nullptr;
 
   void createInstance();
+  void createDevice();
 
  public:
   VkManager();
