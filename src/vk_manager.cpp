@@ -9,8 +9,8 @@ VkManager::~VkManager() {}
 
 void VkManager::createInstance() {
   vk::ApplicationInfo appInfo{.apiVersion = vk::ApiVersion14};
-  vk::InstanceCreateInfo createInfo{.pApplicationInfo = &appInfo};
-  createInfo.setPEnabledLayerNames(enableLayerNames);
+  auto createInfo = vk::InstanceCreateInfo{.pApplicationInfo = &appInfo}
+                        .setPEnabledLayerNames(enableLayerNames);
   _instance = vk::raii::Instance(_context, createInfo);
 }
 
@@ -43,7 +43,7 @@ void VkManager::createDevice() {
     }
   }
 
-  vk::DeviceCreateInfo deviceCreateInfo{};
-  deviceCreateInfo.setQueueCreateInfos(deviceQueueCreateInfos);
+  auto deviceCreateInfo =
+      vk::DeviceCreateInfo{}.setQueueCreateInfos(deviceQueueCreateInfos);
   _device = vk::raii::Device(physicalDevice, deviceCreateInfo);
 }
