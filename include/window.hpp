@@ -9,7 +9,7 @@
  */
 class Window {
  public:
-  virtual vk::raii::SurfaceKHR getSurface() = 0;
+  virtual vk::raii::SurfaceKHR createSurface(vk::raii::Instance* instance) = 0;
 
   virtual void setTitle(const char* title) = 0;
   virtual void setWidth(uint16_t width) = 0;

@@ -1,12 +1,9 @@
 #ifndef APPLICATION_HPP
 #define APPLICATION_HPP
 
-#include <vulkan/vulkan_raii.hpp>
-
 #ifdef _WIN32
 #include "platform/windows/window_windows.hpp"
 #endif
-
 #include "vk_manager.hpp"
 
 class Application {

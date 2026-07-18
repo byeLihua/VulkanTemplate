@@ -1,6 +1,6 @@
 #include "application.hpp"
 
-Application::Application() {}
+Application::Application() : _window(), _vkManager(&_window) {}
 
 Application::~Application() {}
 

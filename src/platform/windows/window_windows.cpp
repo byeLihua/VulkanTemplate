@@ -37,7 +37,15 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg, WPARAM wParam,
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-vk::raii::SurfaceKHR WindowWindows::getSurface() { return nullptr; }
+vk::raii::SurfaceKHR WindowWindows::createSurface(
+    vk::raii::Instance* instance) {
+  vk::Win32SurfaceCreateInfoKHR surfaceCreateInfo{.hinstance = _hInstance,
+                                                  .hwnd = _hWnd};
+  vk::raii::SurfaceKHR surface =
+      instance->createWin32SurfaceKHR(surfaceCreateInfo);
+  // return instance->createWin32SurfaceKHR(surfaceCreateInfo);
+  return nullptr;
+}
 
 void WindowWindows::setTitle(const char* title) {}
 

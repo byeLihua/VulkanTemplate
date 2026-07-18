@@ -1,8 +1,9 @@
 #include "vk_manager.hpp"
 
-VkManager::VkManager() {
+VkManager::VkManager(Window* window) {
   createInstance();
   createDevice();
+  _surface = window->createSurface(&_instance);
 }
 
 VkManager::~VkManager() {}
@@ -10,7 +11,8 @@ VkManager::~VkManager() {}
 void VkManager::createInstance() {
   vk::ApplicationInfo appInfo{.apiVersion = vk::ApiVersion14};
   auto createInfo = vk::InstanceCreateInfo{.pApplicationInfo = &appInfo}
-                        .setPEnabledLayerNames(enableLayerNames);
+                        .setPEnabledLayerNames(_enableLayerNames)
+                        .setPEnabledExtensionNames(_enableExtensionNames);
   _instance = vk::raii::Instance(_context, createInfo);
 }
 
