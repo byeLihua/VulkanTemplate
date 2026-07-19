@@ -2,17 +2,18 @@
 
 VkManager::VkManager(Window* window) {
   createInstance();
-  createDevice();
   _surface = window->createSurface(&_instance);
+  createDevice();
 }
 
 VkManager::~VkManager() {}
 
 void VkManager::createInstance() {
   vk::ApplicationInfo appInfo{.apiVersion = vk::ApiVersion14};
-  auto createInfo = vk::InstanceCreateInfo{.pApplicationInfo = &appInfo}
-                        .setPEnabledLayerNames(_enableLayerNames)
-                        .setPEnabledExtensionNames(_enableExtensionNames);
+  auto createInfo =
+      vk::InstanceCreateInfo{.pApplicationInfo = &appInfo}
+          .setPEnabledLayerNames(_enableInstanceLayerNames)
+          .setPEnabledExtensionNames(_enableInstanceExtensionNames);
   _instance = vk::raii::Instance(_context, createInfo);
 }
 
@@ -46,6 +47,29 @@ void VkManager::createDevice() {
   }
 
   auto deviceCreateInfo =
-      vk::DeviceCreateInfo{}.setQueueCreateInfos(deviceQueueCreateInfos);
+      vk::DeviceCreateInfo{}
+          .setQueueCreateInfos(deviceQueueCreateInfos)
+          .setPEnabledExtensionNames(_enableDeviceExtensionNames);
   _device = vk::raii::Device(physicalDevice, deviceCreateInfo);
+
+  // create swapchain
+  vk::PhysicalDeviceSurfaceInfo2KHR surfaceInfo{.surface = _surface};
+  auto surfaceCapabilities =
+      physicalDevice.getSurfaceCapabilities2KHR(surfaceInfo);
+  auto surfaceFormats = physicalDevice.getSurfaceFormats2KHR(surfaceInfo);
+  auto surfacePresentModes = physicalDevice.getSurfacePresentModesKHR(_surface);
+  vk::SwapchainCreateInfoKHR swapchainCreateInfo{
+      .surface = _surface,
+      .minImageCount = surfaceCapabilities.surfaceCapabilities.minImageCount,
+      .imageFormat = vk::Format::eB8G8R8A8Srgb,
+      .imageColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear,
+      .imageExtent = surfaceCapabilities.surfaceCapabilities.currentExtent,
+      .imageArrayLayers = 1,
+      .imageUsage = vk::ImageUsageFlagBits::eColorAttachment,
+      .imageSharingMode = vk::SharingMode::eExclusive,
+      .preTransform = surfaceCapabilities.surfaceCapabilities.currentTransform,
+      .compositeAlpha = vk::CompositeAlphaFlagBitsKHR::eOpaque,
+      .presentMode = vk::PresentModeKHR::eFifo,
+      .clipped = true};
+  _swapchain = vk::raii::SwapchainKHR(_device, swapchainCreateInfo);
 }

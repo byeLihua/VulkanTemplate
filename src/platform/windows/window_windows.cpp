@@ -41,10 +41,7 @@ vk::raii::SurfaceKHR WindowWindows::createSurface(
     vk::raii::Instance* instance) {
   vk::Win32SurfaceCreateInfoKHR surfaceCreateInfo{.hinstance = _hInstance,
                                                   .hwnd = _hWnd};
-  vk::raii::SurfaceKHR surface =
-      instance->createWin32SurfaceKHR(surfaceCreateInfo);
-  // return instance->createWin32SurfaceKHR(surfaceCreateInfo);
-  return nullptr;
+  return instance->createWin32SurfaceKHR(surfaceCreateInfo);
 }
 
 void WindowWindows::setTitle(const char* title) {}
