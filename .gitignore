@@ -1,2 +1,5 @@
 # Build directories
 build/
+
+# shader binary code
+shader/*.spv
